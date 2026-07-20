@@ -1,0 +1,18 @@
+# LIGHTWEIGHT web-serving dependencies — this is what Streamlit Community Cloud
+# installs (it reads requirements.txt at the repo root).
+#
+# The app embeds queries via Cloudflare Workers AI bge-m3 (a free, no-card HTTP API,
+# the SAME model the corpus was built with), so it does NOT load the local ~2.3GB
+# model — no sentence-transformers/torch here. It only needs to call an HTTP endpoint
+# (requests), search Chroma, and synthesize with Groq.
+#
+# The full ingestion/processing stack lives in requirements-pipeline.txt and runs on
+# your machine / the GitHub Actions refresh, never on the web host.
+#
+# Required host secrets: GROQ_API_KEY, CF_ACCOUNT_ID, CF_API_TOKEN.
+
+streamlit
+groq
+chromadb
+python-dotenv
+requests

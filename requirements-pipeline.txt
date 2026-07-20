@@ -1,0 +1,21 @@
+# FULL pipeline dependencies — ingestion + processing + report + Google Docs.
+# Used by: local dev, and the GitHub Actions weekly-refresh workflow.
+# NOT used by the web host — Streamlit Cloud installs the lightweight requirements.txt.
+
+groq
+chromadb
+sentence-transformers
+python-dotenv
+pandas
+scikit-learn
+hdbscan
+google-play-scraper
+praw
+trafilatura
+requests
+langdetect
+apify-client
+# Google Docs report publishing (optional)
+google-api-python-client
+google-auth-oauthlib
+markdown

@@ -1,0 +1,24 @@
+# === Secrets — NEVER commit ===
+.env
+app/client_secret.json
+app/.gdoc_token.json
+app/.gdoc_state.json
+
+# === Python / env ===
+.venv/
+__pycache__/
+*.pyc
+
+# === Raw scraped data — may contain UNSCRUBBED PII, never commit ===
+ingestion/data/
+
+# === Scheduled-refresh logs ===
+logs/
+
+# === OS ===
+.DS_Store
+Thumbs.db
+
+# NOTE: the processed corpus (rag/chroma_data/, processing/insights.db,
+# processing/data/chunks_embedded.jsonl) and docs/INSIGHT_REPORT.md ARE tracked
+# on purpose — the deployed app and the Actions refresh loop need them in the repo.
