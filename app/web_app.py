@@ -41,6 +41,15 @@ from dotenv import load_dotenv  # noqa: E402
 
 load_dotenv()
 
+# On Streamlit Community Cloud, secrets are provided via st.secrets (not os.environ),
+# but the backend reads os.getenv(...). Bridge them so GROQ/Cloudflare creds are found.
+# Locally these come from .env, so this is a harmless no-op there.
+try:
+    for _k, _v in st.secrets.items():
+        os.environ.setdefault(_k, str(_v))
+except Exception:
+    pass
+
 from chatbot import ChatSession  # noqa: E402
 
 REPORT_PATH = os.path.join(_PROJECT_ROOT, "docs", "INSIGHT_REPORT.md")
