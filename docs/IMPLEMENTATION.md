@@ -255,11 +255,14 @@ the corpus tracked (Phase 9 migration), and Actions secrets `GROQ_API_KEY`,
 Windows Task Scheduler stays as the reliable local path (home IP + creds); GitHub Actions
 is the PC-off cloud path. Untested until the GitHub repo exists.
 
-**Status:** built and registered. `refresh.py` + `scripts/run_refresh.ps1` + the on-demand
-button done; the weekly Windows task is registered and Ready (next run Sun 03:00). The
-GitHub Actions workflow is written but pending the GitHub-repo migration. Remaining to fully
-close the exit criterion: one completed run whose log ends in `VALIDATION GATE: PASS`
-(the first scheduled fire, a manual `run_refresh.ps1 --skip-ingest`, or an Actions run).
+**Status: COMPLETE.** A manual `refresh.py --skip-ingest` run (8B model) reprocessed the
+corpus end-to-end and ended in `VALIDATION GATE: PASS` (6/8 answered, 2/8 insufficient,
+groundedness/hallucination gates passed) — closing the exit criterion. That run also
+scrubbed the corpus via the new PII scrubber (raw emails → 0; `[PHONE]`/`[ID]` markers
+present) and the scrubbed corpus + report were pushed to GitHub. Scheduler surfaces all
+built: Windows Task `BlinkitRAGWeeklyRefresh` (Ready, Sun 03:00), the on-demand "Refresh
+Now" button, and the GitHub Actions workflow (repo now exists; secrets GROQ/CF/APIFY set,
+Reddit creds still needed for a full cloud scrape).
 
 ---
 
