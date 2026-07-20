@@ -14,6 +14,7 @@ model, so this module loads bge-m3 lazily for that purpose only.
 
 import math
 import os
+import time
 
 import chromadb
 
@@ -77,18 +78,27 @@ def _embed_query_cloudflare(text: str) -> list[float]:
     account_id, token = _cf_creds()
     model = os.getenv("CF_EMBED_MODEL", "@cf/baai/bge-m3")
     url = f"https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run/{model}"
-    resp = requests.post(
-        url,
-        headers={"Authorization": f"Bearer {token}"},
-        json={"text": [text]},
-        timeout=30,
-    )
-    resp.raise_for_status()
-    payload = resp.json()
-    if not payload.get("success", False):
-        raise RuntimeError(f"Cloudflare embedding failed: {payload.get('errors')}")
-    vec = payload["result"]["data"][0]
-    return _l2_normalize(vec)
+    # Retry transient network errors (timeouts / blips) — one embedding failure
+    # shouldn't sink a whole query. Short linear backoff, 3 attempts.
+    last_err = None
+    for attempt in range(3):
+        try:
+            resp = requests.post(
+                url,
+                headers={"Authorization": f"Bearer {token}"},
+                json={"text": [text]},
+                timeout=20,
+            )
+            resp.raise_for_status()
+            payload = resp.json()
+            if not payload.get("success", False):
+                raise RuntimeError(f"Cloudflare embedding failed: {payload.get('errors')}")
+            return _l2_normalize(payload["result"]["data"][0])
+        except (requests.exceptions.RequestException, RuntimeError) as e:
+            last_err = e
+            if attempt < 2:
+                time.sleep(1.5 * (attempt + 1))
+    raise RuntimeError(f"Cloudflare embedding failed after 3 attempts: {last_err}")
 
 
 def embed_query(text: str) -> list[float]:

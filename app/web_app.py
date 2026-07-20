@@ -50,7 +50,16 @@ try:
 except Exception:
     pass
 
+# Point Chroma at a fresh, writable ephemeral dir and rebuild it from the portable
+# JSONL at startup (see get_session). The committed rag/chroma_data index is written
+# by a specific chromadb version; the host may run a different one that can't read it
+# (chromadb.errors.NotFoundError). Rebuilding from JSONL sidesteps that entirely.
+import tempfile  # noqa: E402
+
+os.environ["CHROMA_PERSIST_DIR"] = os.path.join(tempfile.gettempdir(), "blinkit_chroma")
+
 from chatbot import ChatSession  # noqa: E402
+from load_chroma import build_collection  # noqa: E402
 
 REPORT_PATH = os.path.join(_PROJECT_ROOT, "docs", "INSIGHT_REPORT.md")
 
@@ -66,11 +75,12 @@ SOURCE_TYPES = [
 st.set_page_config(page_title="Blinkit Category Cross-Sell — RAG Insights", page_icon="🛒", layout="centered")
 
 
-@st.cache_resource(show_spinner="Loading retrieval model + corpus (first load only)…")
+@st.cache_resource(show_spinner="Building the search index from the corpus (first load only)…")
 def get_session() -> ChatSession:
-    """One ChatSession per container. @st.cache_resource keeps the bge-m3 model
-    and Chroma client resident across reruns/visitors instead of reloading the
-    ~2.3GB model on every interaction."""
+    """One ChatSession per container. Runs once (cached): rebuilds the Chroma index
+    from the portable JSONL into the ephemeral dir, then returns a session. Query
+    embedding goes through Cloudflare (no local model), so this is fast."""
+    build_collection()
     return ChatSession()
 
 

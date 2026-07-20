@@ -74,30 +74,37 @@ def _drop_self_promotion(chunks: list[dict]) -> list[dict]:
     return kept
 
 
-def main() -> None:
-    print("Loading embedded chunks...")
+def build_collection(verbose: bool = False) -> int:
+    """Rebuild the Chroma collection from the portable chunks_embedded.jsonl into
+    whatever CHROMA_PERSIST_DIR points at, using the running chromadb version.
+
+    This is the version-agnostic path the web host uses: the committed
+    rag/chroma_data binary index is written by a specific chromadb version and a
+    different host version may not read it, but the JSONL (precomputed embeddings
+    as plain JSON) is portable, so rebuilding from it always yields an index the
+    current chromadb can read. Same dedup + self-promo filter as a normal load, so
+    retrieval is identical."""
     chunks = _load_chunks()
-    print(f"  {len(chunks)} chunks from {CHUNKS_PATH}")
-
     deduped = _dedup_by_text(chunks)
-    print(f"  {len(deduped)} after chunk-level text dedup ({len(chunks) - len(deduped)} duplicates dropped)")
-
     filtered = _drop_self_promotion(deduped)
-    print(f"  {len(filtered)} after self-promotion filter ({len(deduped) - len(filtered)} promo chunks dropped)")
-    deduped = filtered
+    if verbose:
+        print(f"  {len(chunks)} chunks -> {len(deduped)} after dedup -> {len(filtered)} after promo filter")
 
     client = get_client()
-    collection = get_collection(client)
     # Rebuild from scratch so removed duplicates don't linger from a prior load.
     try:
-        client.delete_collection(collection.name)
+        client.delete_collection(get_collection(client).name)
     except Exception:
         pass
     collection = get_collection(client)
+    return add_chunks(collection, filtered)
 
-    print("Upserting into Chroma...")
-    n = add_chunks(collection, deduped)
-    print(f"  upserted {n} chunks into '{collection.name}' (total in collection: {collection.count()})")
+
+def main() -> None:
+    print(f"Loading embedded chunks from {CHUNKS_PATH}...")
+    n = build_collection(verbose=True)
+    client = get_client()
+    print(f"  upserted {n} chunks (total in collection: {get_collection(client).count()})")
 
 
 if __name__ == "__main__":
