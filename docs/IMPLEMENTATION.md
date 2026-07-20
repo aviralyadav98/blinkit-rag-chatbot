@@ -332,10 +332,12 @@ weekly pipeline silently dies. Unverified-in-Production is fine for the user's o
 | Pipeline slot | `refresh.py` step 6/6, AFTER `validate.py` — only a report that cleared the Phase 6 gate is published. Opt-in: skipped silently unless a token exists, so the core pipeline never depends on it. |
 | Secret hygiene | `client_secret.json`, `.gdoc_token.json`, `.gdoc_state.json` all gitignored; pointers in `.env.example`. |
 
-**Status:** `gdoc_auth.py` + `publish_gdoc.py` built, wired into `refresh.py`, deps added.
-Verified: markdown→HTML conversion, graceful no-token failure (no browser), clean
-missing-client-secret message. Remaining (user, one-time): create the OAuth client, set
-consent screen to Production, run `app/gdoc_auth.py`.
+**Status: COMPLETE.** OAuth client created, Drive API enabled, `gdoc_auth.py` run (token
+minted), and `publish_gdoc.py` published the report to a live Google Doc shared to the
+user (editor). Doc id persisted in `app/.gdoc_state.json`, so `refresh.py` step 6/6 now
+updates that same Doc in place on every run (stable link). All 3 sensitive files
+(client secret, token, state) verified gitignored. *(Reminder: keep the OAuth consent
+screen in "Production" or the refresh token expires in 7 days and the auto-publish stops.)*
 
 ---
 
