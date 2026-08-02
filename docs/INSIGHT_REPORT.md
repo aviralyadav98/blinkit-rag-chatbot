@@ -2,7 +2,7 @@
 
 *Why Blinkit users don't explore new product categories — grounded in real public user language.*
 
-**Generated:** 2026-07-26 · **Completeness:** 8/8 questions addressed (7 answered, 1 insufficient-evidence) · **Synthesis model:** `llama-3.3-70b-versatile`
+**Generated:** 2026-08-02 · **Completeness:** 8/8 questions addressed (5 answered, 3 insufficient-evidence) · **Synthesis model:** `llama-3.3-70b-versatile`
 
 Every claim below is traceable to a cited source passage; where evidence is thin, the report says so explicitly rather than guessing.
 
@@ -11,14 +11,15 @@ Every claim below is traceable to a cited source passage; where evidence is thin
 
 Users repeatedly buy from the same categories due to trust and convenience.
 
-**Confidence:** high — seen across 2 comparison/editorial articles, 1 App Store reviews (2 source types) · 2/2 runs answered (1 skipped).
+**Confidence:** high — seen across 2 comparison/editorial articles, 1 App Store reviews (2 source types) · 3/3 runs answered.
 
 **Evidence:**
 
-- Users trust certain brands for repeat-purchase items like diapers.
-    - _"a ₹50 saving on diapers does not outweigh the risk of using an unfamiliar brand on a newborn"_ — comparison_content, 2026-04-09 — [source](https://laffaz.com/baby-products-quick-delivery-india-ozi-blinkit-vertical-quick-commerce/)
-- Convenience is a key driver for repeat purchases in quick commerce.
-    - _"The ability to solve in time-sensitive situations with a few taps is what continues to make q-commerce so sticky for urban shoppers"_ — comparison_content, 2025-04-04 — [source](https://www.theestablished.com/self/beauty/the-rise-and-rise-of-beauty-on-indias-quick-commerce-platforms)
+- Users trust certain brands for repeat-purchase items like diapers and are not price-sensitive.
+    - _"Young parents repeat-purchase across a narrow set of trusted brands."_ — comparison_content, 2026-04-09 — [source](https://laffaz.com/baby-products-quick-delivery-india-ozi-blinkit-vertical-quick-commerce/)
+- Convenience is a key factor in repeat purchases, especially for time-sensitive situations.
+    - _"convenience is the key growth driver."_ — comparison_content, 2025-04-04 — [source](https://www.theestablished.com/self/beauty/the-rise-and-rise-of-beauty-on-indias-quick-commerce-platforms)
+- Quick commerce platforms provide fast delivery for regular use products, encouraging repeat purchases.
     - _"Fast delivery for regular use products"_ — app_store_review, 2026-04-10T07:44:20-07:00 — `13943066086`
 
 ---
@@ -27,7 +28,7 @@ Users repeatedly buy from the same categories due to trust and convenience.
 
 **Finding: Insufficient evidence.**
 
-The passages do not provide direct evidence on what prevents users from exploring new categories on Blinkit. (0/3 runs answered)
+There is not enough information in the passages to determine what prevents users from exploring new categories, as the passages primarily discuss the market, platforms, and products rather than user behavior or obstacles to exploration. (0/3 runs answered)
 
 > This is a reported finding, not an error — the available public discussion did not contain enough grounded signal to answer this question without speculation.
 
@@ -35,33 +36,26 @@ The passages do not provide direct evidence on what prevents users from explorin
 
 ## Q3. How do users discover products today?
 
-Users discover products today through various means, including social media reviews, word of mouth, brand-led education, and quick commerce platforms.
+**Finding: Insufficient evidence.**
 
-**Confidence:** single-source — single-source: 2 comparison/editorial articles · 3/3 runs answered.
+The passages do not provide direct information on how users discover products today, but rather discuss the growth of quick commerce, consumer behavior, and brand strategies in the beauty and skincare industry. (0/3 runs answered)
 
-**Evidence:**
-
-- Social media reviews are a means of product discovery.
-    - _"new product discovery in premium beauty still tends to happen elsewhere—via social media reviews, word of mouth, or brand-led education"_ — comparison_content, 2025-04-04 — [source](https://www.theestablished.com/self/beauty/the-rise-and-rise-of-beauty-on-indias-quick-commerce-platforms)
-- Quick commerce platforms are used for product discovery.
-    - _"The growing awareness and openness around sexual wellness, combined with customers’ increasing reliance on quick commerce, made it the perfect channel."_ — comparison_content, 2025-04-04 — [source](https://www.theestablished.com/self/beauty/the-rise-and-rise-of-beauty-on-indias-quick-commerce-platforms)
-- Brand-led education is a means of product discovery.
-    - _"new product discovery in premium beauty still tends to happen elsewhere—via social media reviews, word of mouth, or brand-led education"_ — comparison_content, 2025-04-04 — [source](https://www.theestablished.com/self/beauty/the-rise-and-rise-of-beauty-on-indias-quick-commerce-platforms)
+> This is a reported finding, not an error — the available public discussion did not contain enough grounded signal to answer this question without speculation.
 
 ---
 
 ## Q4. What role do habits play in shopping behavior?
 
-Habits play a significant role in shopping behavior, as customers seek convenience without compromising on quality, and quick commerce platforms enable high-repeat, low-involvement purchases.
+Habits play a role in shopping behavior as customers seek convenience without compromising on quality, and platforms like Blinkit allow them to bring products to their doorstep within minutes.
 
-**Confidence:** single-source — single-source: 2 comparison/editorial articles · 3/3 runs answered.
+**Confidence:** single-source — single-source: 1 comparison/editorial articles · 3/3 runs answered.
 
 **Evidence:**
 
 - Customers seek convenience without compromising on quality
-    - _"customers seek convenience without compromising on quality"_ — comparison_content, 2025-04-04 — [source](https://www.theestablished.com/self/beauty/the-rise-and-rise-of-beauty-on-indias-quick-commerce-platforms)
-- Quick commerce platforms enable high-repeat, low-involvement purchases
-    - _"Quick commerce is highly effective for high-repeat, low-involvement products"_ — comparison_content, 2025-04-04 — [source](https://www.theestablished.com/self/beauty/the-rise-and-rise-of-beauty-on-indias-quick-commerce-platforms)
+    - _"As shopping habits evolve, customers seek convenience without compromising on quality."_ — comparison_content, 2025-04-04 — [source](https://www.theestablished.com/self/beauty/the-rise-and-rise-of-beauty-on-indias-quick-commerce-platforms)
+- Platforms like Blinkit enable quick deliveries
+    - _"Platforms like Zepto and Blinkit allow us to bring our skincare and make-up essentials to their doorstep within minutes,"_ — comparison_content, 2025-04-04 — [source](https://www.theestablished.com/self/beauty/the-rise-and-rise-of-beauty-on-indias-quick-commerce-platforms)
 
 ---
 
@@ -69,73 +63,69 @@ Habits play a significant role in shopping behavior, as customers seek convenien
 
 Users need detailed and clear product information, transparency in sourcing and handling practices, and reviews from other customers before trying a new category.
 
-**Confidence:** single-source — single-source: 3 comparison/editorial articles · 3/3 runs answered.
+**Confidence:** single-source — single-source: 2 comparison/editorial articles · 3/3 runs answered.
 
 **Evidence:**
 
-- Users need detailed and clear product information before trying a new category
+- Users need detailed and clear product information
     - _"detailed and clear product information"_ — comparison_content, 2024-06-19 — [source](https://www.storyboard18.com/brand-marketing/dark-side-of-dark-stores-q-comm-brands-like-blinkit-zepto-are-quickly-losing-consumer-trust-34430.htm)
-- Users need transparency in sourcing and handling practices before trying a new category
+- Users need transparency in sourcing and handling practices
     - _"transparency in sourcing and handling practices"_ — comparison_content, 2024-06-19 — [source](https://www.storyboard18.com/brand-marketing/dark-side-of-dark-stores-q-comm-brands-like-blinkit-zepto-are-quickly-losing-consumer-trust-34430.htm)
-- Users consider reviews from other customers before trying a new category
+- Users consider reviews from other customers
     - _"consider reviews"_ — comparison_content, 2024-06-19 — [source](https://www.storyboard18.com/brand-marketing/dark-side-of-dark-stores-q-comm-brands-like-blinkit-zepto-are-quickly-losing-consumer-trust-34430.htm)
-- Users need to know their specific needs, such as skin type, before trying a new category like skincare
-    - _"Knowing your skin type is the first step in selecting the appropriate cosmetics"_ — comparison_content, 2024-11-24 — [source](https://proskire.in/blogs/news/the-ultimate-guide-to-buying-skincare-products-online-what-you-need-to-know)
 
 ---
 
 ## Q6. What frustrations emerge repeatedly?
 
-Frustrations with delivery, pricing, and app functionality emerge repeatedly.
+Frustrations with delivery, customer service, and operational practices emerge repeatedly.
 
 **Confidence:** single-source — single-source: 6 App Store reviews · 3/3 runs answered.
 
 **Evidence:**
 
-- Delivery issues are a common frustration
-    - _"Frustrations with Blinkit's Delivery and Pricing"_ — structured_store, aggregate
+- Delivery issues are a common frustration.
+    - _"Challenges and limitations of quick-commerce platforms"_ — structured_store, aggregate
     - _"Waiting for printout from last one hour and they made me to reorder again"_ — app_store_review, 2026-02-10T01:03:41-07:00 — `13733367397`
-- Pricing concerns, including surge charges and handling fees, are frustrating
-    - _"Frustrations with Blinkit's Delivery and Pricing"_ — structured_store, aggregate
+- Poor customer service is a recurring issue.
+    - _"Poor customer service and unexpected charges"_ — structured_store, aggregate
+    - _"After payment it shows payment failure and money deducted from account."_ — app_store_review, 2025-11-08T01:28:46-07:00 — `13371294421`
+- Unexpected charges and surge pricing are frustrating for users.
+    - _"Poor customer service and unexpected charges"_ — structured_store, aggregate
     - _"100% increase in handling charges is truly unfair"_ — app_store_review, 2026-05-18T19:23:48-07:00 — `14080538108`
     - _"Always a surge charge we do get offers then spend it on surge charge very bad"_ — app_store_review, 2026-05-08T08:50:43-07:00 — `14042007689`
-- App functionality issues, such as crashes and payment failures, are frustrating
-    - _"After payment it shows payment failure and money deducted from account"_ — app_store_review, 2025-11-08T01:28:46-07:00 — `13371294421`
+- App crashes and poor packaging are also sources of frustration.
     - _"App crashed three times before being able to get it to work"_ — app_store_review, 2026-02-23T16:50:21-07:00 — `13782289874`
-- Packing issues are also a source of frustration
     - _"UNSATISFIED PACKING"_ — app_store_review, 2026-06-17T01:09:30-07:00 — `14192574665`
 
 ---
 
 ## Q7. Which user segments are more likely to experiment?
 
-Young parents are more likely to experiment with new product categories due to their high-emotion, high-trust, repeat-purchase behavior.
+**Finding: Insufficient evidence.**
 
-**Confidence:** single-source — single-source: 1 comparison/editorial articles · 2/3 runs answered.
+There is not enough information to determine which user segments are more likely to experiment with new product categories on Blinkit. (0/3 runs answered)
 
-**Evidence:**
-
-- Young parents are more likely to experiment with new product categories
-    - _"Parenting is near the top of that list."_ — comparison_content, 2026-04-09 — [source](https://laffaz.com/baby-products-quick-delivery-india-ozi-blinkit-vertical-quick-commerce/)
+> This is a reported finding, not an error — the available public discussion did not contain enough grounded signal to answer this question without speculation.
 
 ---
 
 ## Q8. What unmet needs emerge consistently across discussions?
 
-Unmet needs that emerge consistently across discussions include frustrations with delivery, concerns about safety and regulatory compliance, and the desire for consistency in product quality.
+Unmet needs that emerge consistently across discussions include consistency in product quality, proper quality checks, and better customer service.
 
 **Confidence:** high — seen across 2 App Store reviews, 1 comparison/editorial articles (2 source types) · 3/3 runs answered.
 
 **Evidence:**
 
-- Frustrations with delivery are a common theme
-    - _"Frustrations with Blinkit's Delivery and Pricing"_ — structured_store, aggregate
-    - _"Delivery training of new employees is poor and thus many issues"_ — app_store_review, 2026-07-15T09:29:08-07:00 — `14306803672`
-- Concerns about safety and regulatory compliance are expressed
-    - _"Blinkit's safety and regulatory compliance concerns"_ — structured_store, aggregate
-    - _"regulations for the e-commerce industry in 2020"_ — comparison_content, 2024-06-19 — [source](https://www.storyboard18.com/brand-marketing/dark-side-of-dark-stores-q-comm-brands-like-blinkit-zepto-are-quickly-losing-consumer-trust-34430.htm)
-- Consistency in product quality is desired
+- Consistency in product quality is an unmet need
     - _"I would expect consistency in product quality which is only lagging"_ — app_store_review, 2026-07-05T22:23:15-07:00 — `14268729934`
+- Proper quality checks are an unmet need
+    - _"Proper quality check is the bottleneck"_ — app_store_review, 2026-07-05T22:23:15-07:00 — `14268729934`
+    - _"basic checks required at these dark stores are related to the separation of food and non-food products, maintaining hygienic practices"_ — comparison_content, 2024-06-19 — [source](https://www.storyboard18.com/brand-marketing/dark-side-of-dark-stores-q-comm-brands-like-blinkit-zepto-are-quickly-losing-consumer-trust-34430.htm)
+- Better customer service is an unmet need
+    - _"Poor customer service and unexpected charges"_ — structured_store, aggregate
+    - _"Delivery training of new employees is poor and thus many issues"_ — app_store_review, 2026-07-15T09:29:08-07:00 — `14306803672`
 
 ---
 
@@ -177,5 +167,5 @@ corpus yielded **8 themes** (39 audit quotes).
   main lever for stronger cross-source confidence.
 - **Sparse questions.** Where public discussion is genuinely thin (e.g. user
   segments), the report returns "insufficient evidence" rather than manufacturing
-  a confident answer. This run: **7/8 answered, 1/8
+  a confident answer. This run: **5/8 answered, 3/8
   insufficient-evidence, 2/8 high-confidence (≥2 source types).**
