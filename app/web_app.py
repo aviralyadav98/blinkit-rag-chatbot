@@ -72,7 +72,7 @@ SOURCE_TYPES = [
     "comparison_content",
 ]
 
-st.set_page_config(page_title="Blinkit Category Cross-Sell — RAG Insights", page_icon="🛒", layout="centered")
+st.set_page_config(page_title="Blinkit review analyser", page_icon="🛒", layout="centered")
 
 
 @st.cache_resource(show_spinner="Building the search index from the corpus (first load only)…")
@@ -180,7 +180,7 @@ def report_tab() -> None:
 
 
 def main() -> None:
-    st.title("🛒 Blinkit Category Cross-Sell — RAG Insights")
+    st.title("🛒 Blinkit review analyser")
     if not os.getenv("GROQ_API_KEY"):
         st.error(
             "GROQ_API_KEY is not set. Locally: put it in `.env`. On Hugging Face "
