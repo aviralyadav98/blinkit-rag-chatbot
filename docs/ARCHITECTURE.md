@@ -252,6 +252,7 @@ call, not a fork.
   `sentence-transformers` import is lazy so it's never pulled in on the API path. Vector
   consistency verified: Cloudflare vs local cosine = 1.0000 (`rag/test_cloudflare_embed.py`),
   so the existing corpus is reused unchanged.
+- **Live app** — https://blinkit-rag-chatbot-ehkepfd8balv9ayq9tszcz.streamlit.app/
 - **Hosting** — Streamlit Community Cloud (free; deploys from a GitHub repo). The committed
   corpus (`rag/chroma_data` + `processing/insights.db`, ~11MB) travels in the repo, so the
   app serves answers without ever running ingestion or embedding the corpus. `GROQ_API_KEY`,

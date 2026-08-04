@@ -4,6 +4,8 @@ A RAG chatbot that answers behavioral research questions about Blinkit's categor
 cross-sell problem, grounded in real user language from App Store reviews, Play Store
 reviews, Reddit, forums, social media, and product reviews.
 
+**Live app:** https://blinkit-rag-chatbot-ehkepfd8balv9ayq9tszcz.streamlit.app/
+
 ## Start here
 - `CLAUDE.md` — project context Claude Code reads automatically. Open this folder in
   Claude Code (or run `claude` from inside it) and it has full context to start building.
