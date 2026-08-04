@@ -25,9 +25,10 @@ flagged, so a citation can never point at text that isn't there.
 
 import json
 import os
+import time
 
 from dotenv import load_dotenv
-from groq import Groq
+from groq import Groq, RateLimitError
 
 from confidence import compute_confidence
 
@@ -108,8 +109,16 @@ def _verify_and_enrich_citations(
     clean_claims = []
     cited_indices: set[int] = set()
     for claim in claims:
+        if not isinstance(claim, dict):
+            # A weaker model (e.g. 8b-instant) occasionally emits a malformed
+            # claim shape (list instead of object) — drop it rather than crash.
+            dropped += 1
+            continue
         good_cites = []
         for cite in claim.get("citations", []):
+            if not isinstance(cite, dict):
+                dropped += 1
+                continue
             idx = cite.get("passage")
             quote = (cite.get("quote") or "").strip()
             if not isinstance(idx, int) or not (1 <= idx <= len(passages)) or not quote:
@@ -258,6 +267,37 @@ def synthesize(
     }
 
 
+def _retry_after_seconds(e: RateLimitError, default: float, cap: float = 20.0) -> float:
+    """Read Groq's Retry-After / x-ratelimit-reset-tokens header if present,
+    else fall back to `default`. Groq's reset headers are values like '1.2s' or
+    '220ms'; Retry-After is a plain integer-seconds string.
+
+    Deliberately does NOT read x-ratelimit-reset-requests — that's the daily/
+    request-count window, not the per-minute token window we're actually
+    throttled on, and can report values like '14m24s'. Reading it here once
+    caused a single retry to sleep ~14 minutes. Always capped regardless of
+    what a header says, so one bad reading can't hang an unattended run.
+    """
+    headers = getattr(getattr(e, "response", None), "headers", {}) or {}
+    for key in ("retry-after", "x-ratelimit-reset-tokens"):
+        raw = headers.get(key)
+        if not raw:
+            continue
+        try:
+            if raw.endswith("ms"):
+                seconds = max(float(raw[:-2]) / 1000, 0.5)
+            elif raw.endswith("s"):
+                seconds = float(raw[:-1].split("m")[-1]) + (
+                    int(raw.split("m")[0]) * 60 if "m" in raw[:-1] else 0
+                )
+            else:
+                seconds = float(raw)
+            return min(seconds, cap)
+        except ValueError:
+            continue
+    return min(default, cap)
+
+
 def synthesize_voted(
     question: str,
     passages: list[dict],
@@ -277,16 +317,34 @@ def synthesize_voted(
     """
     client = Groq(api_key=os.getenv("GROQ_API_KEY"))
     results = []
-    for _ in range(votes):
-        try:
-            results.append(
-                synthesize(question, passages, history=history, client=client, structured_context=structured_context)
-            )
-        except Exception as e:
-            # A single failed vote — a transient network error or a malformed model
-            # response — must not abort the whole report. Skip it; the surviving
-            # votes still decide. (An automated refresh should tolerate flakiness.)
-            print(f"  [vote skipped: {type(e).__name__}]")
+    for i in range(votes):
+        # Small gap between calls so back-to-back votes/questions don't blow
+        # through Groq's per-minute token budget in a burst (observed: 24 rapid
+        # calls for one report easily exceed a 12k TPM cap with zero pacing).
+        if i > 0:
+            time.sleep(2)
+        for attempt in range(3):
+            try:
+                results.append(
+                    synthesize(
+                        question, passages, history=history, client=client, structured_context=structured_context
+                    )
+                )
+                break
+            except RateLimitError as e:
+                if attempt == 2:
+                    print(f"  [vote skipped: RateLimitError after retries]")
+                    break
+                retry_after = _retry_after_seconds(e, default=10)
+                print(f"  [rate limited, retrying in {retry_after:.0f}s]")
+                time.sleep(retry_after)
+            except Exception as e:
+                # A single failed vote — a transient network error or a malformed
+                # model response — must not abort the whole report. Skip it; the
+                # surviving votes still decide. (An automated refresh should
+                # tolerate flakiness.)
+                print(f"  [vote skipped: {type(e).__name__}]")
+                break
     if not results:
         passage_types = sorted({p["metadata"].get("source_type", "unknown") for p in passages})
         return {
